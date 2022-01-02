@@ -70,9 +70,14 @@ export default function Login() {
                 await dispatch({
                     type: LOADING_GLOBAL_HIDE
                 })
-                history.push('/trangchu')
+                //
+                let credentials = JSON.parse(localStorage.getItem('credentials'));            
+                if(credentials.maLoaiNguoiDung === "GV"){
+                    history.push('/admin/quanlynguoidung')
+                }else{
+                    history.push('/trangchu')
+                }
             }, 2000);
-            clearTimeout()
         }
     }
 

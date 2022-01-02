@@ -22,6 +22,9 @@ export default function UserRegisterModal(props) {
     const [pageCount2, setPageCount2] = useState(0);
     const [itemOffset2, setitemOffset2] = useState(0);
 
+    // Filter course Register
+    const [coursesTerm, setCoursesTerm] = useState('')
+
     useEffect(() => {
         const endOffset = itemOffset1 + 2;
         console.log(`Loading items from ${itemOffset1} to ${endOffset}`);
@@ -87,15 +90,34 @@ export default function UserRegisterModal(props) {
             </tr>
         })
     }
+    
+    // Xử lý thành viên chưa đăng ký
+    const handleCourseRes = (e) => {
+        setCoursesTerm(e.target.value)
+    }
 
     const renderCourseListNotRegister = (notRegItems) => {
-        return notRegItems && notRegItems.map((item, index) => {
-            return <li onClick={()=>{getNotRegItem(item);
-                formik.setValues({tenKhoaHoc:item.tenKhoaHoc})
-            }} className="dropdown-item" href="#">{item.tenKhoaHoc}</li>
-
-        })
+        if(notRegItems){
+           return notRegItems.filter((items) => {
+                if(coursesTerm.trim() === ''){
+                    return items
+                }else if(items.tenKhoaHoc.trim().toLocaleLowerCase().includes(coursesTerm.trim().toLocaleLowerCase())){
+                    return items
+                }
+            }).map((item, index) => {
+                return <li key={index} onClick={()=>{getNotRegItem(item) 
+                    // formik.setValues({tenKhoaHoc:item.tenKhoaHoc})
+                    setCoursesTerm(item.tenKhoaHoc)
+                }} className="dropdown-item" href="#">{item.tenKhoaHoc}</li>
+    
+            })
+        }else{
+            return ''
+        }
+        
     }
+    
+
 
     const regCourseByUser=async(taiKhoan,maKhoaHoc)=>{
         const values={taiKhoan:taiKhoan,maKhoaHoc:maKhoaHoc}
@@ -126,8 +148,10 @@ export default function UserRegisterModal(props) {
         }
     }
 
+    // Formik Register
+    
     const formik = useFormik({
-        initialValues: { tenKhoaHoc: '' },
+        initialValues: { tenKhoaHoc: coursesTerm },
     })
     // useEffect(() => {
     //     dispatch(getSearchCourseList(formik.values))
@@ -147,8 +171,9 @@ export default function UserRegisterModal(props) {
                                
                                 <form className='form-group col-6'>
                                 <div className="input-group float-left ">
-                                    <input value={formik.values.tenKhoaHoc} data-toggle="dropdown" placeholder="Chọn khóa học" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
-                                    <button data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>                          
+                                {/* value={formik.values.tenKhoaHoc} */}
+                                    <input onChange={handleCourseRes}  value={coursesTerm} data-toggle="dropdown" placeholder="Chọn khóa học" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
+                                    <button style={{display:'none'}} data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>                          
                                     <div className="input-group-append ">
                                         <ul className="dropdown-menu set-height">
                                         {renderCourseListNotRegister(courseListNotRegister)}
