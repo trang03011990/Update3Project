@@ -92,10 +92,13 @@ export default function UserRegisterModal(props) {
     }
     
     // Xử lý thành viên chưa đăng ký
+    // xử lý để có thể thay đổi dữ liệu ở ô input khi click vào thể li giá trị bị đè
     const handleCourseRes = (e) => {
         setCoursesTerm(e.target.value)
+        // formik.setValues({tenKhoaHoc:e.target.value})
     }
 
+    // Ở hàm này em thêm filter theo key trước khi mảng đó render thôi chị, chị nhìn là hiểu à
     const renderCourseListNotRegister = (notRegItems) => {
         if(notRegItems){
            return notRegItems.filter((items) => {
@@ -149,7 +152,7 @@ export default function UserRegisterModal(props) {
     }
 
     // Formik Register
-    
+    // Em bỏ k xử dựng cái này khong biết bị ảnh hưởng gì không? Nếu có thể chị có thể gọi hàm setFormikValue ở hàm handleCourseRes bằng formik.setValues({e.target.values}). Lúc đầu không nghỉ ra h mới nghỉ ra chị. Ở trên em có useState để khái báo coursesTerm với setcoursesTerm. để có thể thay đổi giá trị trong ô input. Em vừa thử xong nhưng no k nhảy danh sách theo key gõ chắc k được chị ơi. Vậy nên em dùng useState thay thế formik nha chị để xử lý gõ nó hiện danh sách theo key search. em có test rồi chị test lại xem có lỗi k nha. em có css cứng style cho ul)
     const formik = useFormik({
         initialValues: { tenKhoaHoc: coursesTerm },
     })
@@ -172,10 +175,13 @@ export default function UserRegisterModal(props) {
                                 <form className='form-group col-6'>
                                 <div className="input-group float-left ">
                                 {/* value={formik.values.tenKhoaHoc} */}
-                                    <input onChange={handleCourseRes}  value={coursesTerm} data-toggle="dropdown" placeholder="Chọn khóa học" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
+                                {/* value={coursesTerm} */}
+                                    <input onChange={handleCourseRes} value={coursesTerm}   data-toggle="dropdown" placeholder="Chọn khóa học" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
+                                    {/* Chỗ này em ẩn luôn do cảm thấy bị dư */}
                                     <button style={{display:'none'}} data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>                          
                                     <div className="input-group-append ">
-                                        <ul className="dropdown-menu set-height">
+                                    {/* Em có css cứng chỗ này chị css lại nha do nó nhảy width */}
+                                        <ul className="dropdown-menu set-height" style={{width:'100%', left:'2px'}}>
                                         {renderCourseListNotRegister(courseListNotRegister)}
                                         </ul>
                                     </div>
