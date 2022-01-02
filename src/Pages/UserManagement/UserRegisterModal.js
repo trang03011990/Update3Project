@@ -22,7 +22,7 @@ export default function UserRegisterModal(props) {
     const [pageCount2, setPageCount2] = useState(0);
     const [itemOffset2, setitemOffset2] = useState(0);
 
-    // Filter course Register
+    // Filter course Register(em khai báo ở đây ạ)
     const [coursesTerm, setCoursesTerm] = useState('')
 
     useEffect(() => {
@@ -127,7 +127,9 @@ export default function UserRegisterModal(props) {
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/GhiDanhKhoaHoc', values)
             alert(result.data)
-            formik.resetForm()
+            // formik.resetForm()
+            // Em bỏ dùng cái reset form
+            setCoursesTerm('')
             dispatch(getCourseListNotRegister(taiKhoan))
             dispatch(getCourseListConfirmed(taiKhoan))
             dispatch(getCourseListNotConfirmed(taiKhoan))
@@ -152,7 +154,7 @@ export default function UserRegisterModal(props) {
     }
 
     // Formik Register
-    // Em bỏ k xử dựng cái này khong biết bị ảnh hưởng gì không? Nếu có thể chị có thể gọi hàm setFormikValue ở hàm handleCourseRes bằng formik.setValues({e.target.values}). Lúc đầu không nghỉ ra h mới nghỉ ra chị. Ở trên em có useState để khái báo coursesTerm với setcoursesTerm. để có thể thay đổi giá trị trong ô input. Em vừa thử xong nhưng no k nhảy danh sách theo key gõ chắc k được chị ơi. Vậy nên em dùng useState thay thế formik nha chị để xử lý gõ nó hiện danh sách theo key search. em có test rồi chị test lại xem có lỗi k nha. em có css cứng style cho ul)
+    // Em bỏ k xử dựng cái này khong biết bị ảnh hưởng gì không? Nếu không ảnh hưởng thì chị xóa nha do em k biết xóa có bị j không? Nếu có thể chị có thể gọi hàm setFormikValue ở hàm handleCourseRes bằng formik.setValues({e.target.values}). Lúc đầu không nghỉ ra h mới nghỉ ra chị. Ở trên em có useState để khái báo coursesTerm với setcoursesTerm. để có thể thay đổi giá trị trong ô input. Em vừa thử xong nhưng no k nhảy danh sách theo key gõ chắc k được chị ơi. Vậy nên em dùng useState thay thế formik nha chị để xử lý gõ nó hiện danh sách theo key search. em có test rồi chị test lại xem có lỗi k nha. em có css cứng style cho ul. Không nghỉ ra thì mình thảo luận nha chị em cũng đang đọc doc để làm dự án 2 thôi do nhiều cái không biết chị đừng ngại có j cứ ns em, được thì em nghiên cứu làm với, làm một mình stress á. )
     const formik = useFormik({
         initialValues: { tenKhoaHoc: coursesTerm },
     })
