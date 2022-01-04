@@ -6,7 +6,7 @@ import './Header.css'
 
 export default function Header(props) {
     let keyInput = useRef(null)
-    let keyInputMobile = useRef(null) 
+    let keyInputMobile = useRef(null)
     let login = localStorage.getItem('credentials')
     const history = useHistory()
     const dispatch = useDispatch()
@@ -68,7 +68,7 @@ export default function Header(props) {
             let loginAccount = JSON.parse(login)
             return (
                 <div className='headerAvatar'>
-                    <span className='headerSet'><NavLink to=""><i className="fas fa-cog"></i></NavLink></span>
+                    {loginAccount.maLoaiNguoiDung == 'GV' ? <span className='headerSet'><NavLink to="/admin/quanlynguoidung"><i className="fas fa-cog"></i></NavLink></span> : <></>}
                     <NavLink className='infoHeader' to="/thongtincanhan">
                         <img className='avatar' src={loginAccount.hinhAnh}></img>
                         <span className="logout" onClick={logOut}>

@@ -198,7 +198,7 @@ export default function InfoPage(props) {
                                                 <div className='col-xl-4 col-lg-6'>
                                                     <div className='timeStudy'>
                                                         <div className="timeStudyItem">
-                                                            <i classNameName='fas fa-user-clock mr-2'></i>
+                                                            <i className='fas fa-user-clock mr-2'></i>
                                                             <div>
                                                                 <h6>Giờ học</h6>
                                                                 <p>80</p>

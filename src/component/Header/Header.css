@@ -214,6 +214,10 @@ ul.menuHeader li a:hover {
 }
 
 .infoHeader:hover .logout {
+    transform: translateX(53px);
+}
+
+.headerSet ~ .infoHeader:hover .logout {
     transform: translateX(80px);
 }
 
