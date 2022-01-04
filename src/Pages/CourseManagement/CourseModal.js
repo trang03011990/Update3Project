@@ -39,6 +39,7 @@ export default function CourseModal() {
             alert(errors.response.data)
         }
     }
+    // formik with add courses
     const formik = useFormik({
         initialValues: {
             maKhoaHoc: "",
@@ -58,20 +59,33 @@ export default function CourseModal() {
                 .required('Mã khóa học không được để trống'),
 
             tenKhoaHoc: Yup.string()
-                .required('Tên Khóa học không được để trống'),
+                .required('Tên khóa học không được để trống'),
 
             moTa: Yup.string()
                 .required('Mô tả không được để trống'),
 
-            ngayTao: Yup.date()
+            ngayTao: Yup.string()
                 .required('Ngày tạo không được để trống')
+                .matches(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/, 'Vui lòng nhập đúng định dạng DD/MM/YYYY'),
             // .format('DD/MM/YYYY', true),
-
+            danhGia: Yup.number()
+                .required('Đánh giá không được để trống')
+                .max(5, 'Đánh giá nhiều nhất là 5 sao')
+                .min(0, 'Đánh giá thấp nhất là 0 sao'),
+            luotXem: Yup.number()
+                .required('Đánh giá không được để trống')
+                .min(0, 'Lượt xem thấp nhất là 0'),
+            maDanhMucKhoaHoc: Yup.string()
+                .required('Danh mục khóa học không được để trống'),
+            taiKhoanNguoiTao: Yup.string()
+                .required('Tài khoản không được để trống'),
+            maNhom: Yup.string()
+                .required('Mã nhóm không được để trống')
         }),
         onSubmit: addCourse
     }
     )
-    
+
 
     useEffect(() => {
         dispatch(courseCategory)
@@ -172,6 +186,7 @@ export default function CourseModal() {
                                         {renderCreatorList(userArray)}
                                     </select>
                                 </div>
+                                {formik.touched.taiKhoanNguoiTao && formik.errors.taiKhoanNguoiTao && <div className="text-danger text-left">{formik.errors.taiKhoanNguoiTao}</div>}
                                 <span className="sp-thongbao" id="tbChucVu" />
                             </div>
 
@@ -180,7 +195,7 @@ export default function CourseModal() {
                                     <input name='hinhAnh'
                                         accept="image/png,image/jpg,image/jpeg"
                                         onChange={(event) => {
-                                            let file=event.target.files[0]
+                                            let file = event.target.files[0]
                                             let reader = new FileReader();
                                             reader.readAsDataURL(file);
                                             reader.onload = (e) => {
@@ -217,9 +232,6 @@ export default function CourseModal() {
                                         <option value="GP13">GP13</option>
                                         <option value="GP14">GP14</option>
                                         <option value="GP15">GP15</option>
-
-
-
                                     </select>
                                 </div>
                                 {formik.touched.maNhom && formik.errors.maNhom && <div className="text-danger text-left">{formik.errors.maNhom}</div>}
@@ -240,8 +252,8 @@ export default function CourseModal() {
                                             className="img-fluid rounded"
                                             // alt={File&&File.name}
                                             height={200}
-                                            width={200} />                                    </span>
-
+                                            width={200} />
+                                    </span>
                                     <textarea onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
                                         value={formik.values.moTa} type="text" name="moTa"

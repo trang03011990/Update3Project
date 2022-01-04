@@ -50,8 +50,8 @@ export default function CourseRegisterModal(props) {
     //endPagination
 
     const [RegItem, setRegItem] = useState({})
-    const getNotRegItem=(i)=>{
-        i&&setRegItem(i)
+    const getNotRegItem = (i) => {
+        i && setRegItem(i)
     }
 
 
@@ -61,16 +61,16 @@ export default function CourseRegisterModal(props) {
         dispatch(getUserListNotRegister(props.course))
         dispatch(getUserListNotConfirmed(props.course))
     }, [props.course])
-    
+
     const renderUserListNotConfirmed = (notConfirmedItems) => {
         return notConfirmedItems && notConfirmedItems.map((item, index) => {
             return <tr>
                 <td className="align-middle" scope="row">{index + 1}</td>
                 <td className="align-middle">{item.taiKhoan}</td>
-                                <td className="align-middle">{item.hoTen}</td>
+                <td className="align-middle">{item.hoTen}</td>
                 <td>
-                    <button onClick={()=>{regUserByCourse(props.course,item.taiKhoan)}}className="btn btn-success mx-1" >Xác thực</button>
-                    <button onClick={()=>{deleteUserByCourse(props.course,item.taiKhoan)}} className="btn btn-danger mx-1" >Xóa</button>
+                    <button onClick={() => { regUserByCourse(props.course, item.taiKhoan) }} className="btn btn-success mx-1" >Xác thực</button>
+                    <button onClick={() => { deleteUserByCourse(props.course, item.taiKhoan) }} className="btn btn-danger mx-1" >Xóa</button>
 
                 </td>
             </tr>
@@ -81,10 +81,10 @@ export default function CourseRegisterModal(props) {
         return confirmedItems && confirmedItems.map((item, index) => {
             return <tr>
                 <td className="align-middle" scope="row">{index + 1}</td>
-                                <td className="align-middle">{item.taiKhoan}</td>
+                <td className="align-middle">{item.taiKhoan}</td>
                 <td className="align-middle">{item.hoTen}</td>
                 <td>
-                    <button onClick={()=>{deleteUserByCourse(props.course,item.taiKhoan)}} className="btn btn-danger mx-1" >Xóa</button>
+                    <button onClick={() => { deleteUserByCourse(props.course, item.taiKhoan) }} className="btn btn-danger mx-1" >Xóa</button>
                 </td>
             </tr>
         })
@@ -92,15 +92,16 @@ export default function CourseRegisterModal(props) {
 
     const renderUserListNotRegister = (notRegItems) => {
         return notRegItems && notRegItems.map((item, index) => {
-            return <li onClick={()=>{getNotRegItem(item);
-                formik.setValues({hoTen:item.hoTen})
+            return <li onClick={() => {
+                getNotRegItem(item);
+                formik.setValues({ hoTen: item.hoTen })
             }} className="dropdown-item" href="#">{item.hoTen}</li>
 
         })
     }
 
-    const regUserByCourse=async(maKhoaHoc,taiKhoan)=>{
-        const values={maKhoaHoc:maKhoaHoc,taiKhoan:taiKhoan}
+    const regUserByCourse = async (maKhoaHoc, taiKhoan) => {
+        const values = { maKhoaHoc: maKhoaHoc, taiKhoan: taiKhoan }
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/GhiDanhKhoaHoc', values)
             alert(result.data)
@@ -114,8 +115,8 @@ export default function CourseRegisterModal(props) {
         }
     }
 
-    const deleteUserByCourse=async(maKhoaHoc,taiKhoan)=>{
-        const values={maKhoaHoc:maKhoaHoc,taiKhoan:taiKhoan}
+    const deleteUserByCourse = async (maKhoaHoc, taiKhoan) => {
+        const values = { maKhoaHoc: maKhoaHoc, taiKhoan: taiKhoan }
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/HuyGhiDanh', values)
             alert(result.data)
@@ -150,46 +151,46 @@ export default function CourseRegisterModal(props) {
     // useEffect(() => {
     //     dispatch(getSearchCourseList(formik.values))
     // }, [formik.values])
-    
+
 
 
     return (
         <div className="modal fade" id="courseReg">
-                <div className="modal-dialog formCourse">
-                    <div className="modal-content px-3">
-                        {/* Modal Header */}
-                        <div className="modal-body ">
-                            <div className="pb-3 border-bottom border-secondary">
+            <div className="modal-dialog formCourse">
+                <div className="modal-content px-3">
+                    {/* Modal Header */}
+                    <div className="modal-body ">
+                        <div className="pb-3 border-bottom border-secondary">
                             <div className="row">
                                 <h5 className="text-left my-1 col-3" id="URM-title"> Chọn người dùng</h5>
                                 <form className='form-group col-6'>
-                                <div className="input-group float-left ">
-                                    <input placeholder="Tên người dùng" value={formik.values.hoTen} data-toggle="dropdown" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
-                                    <button data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>                          
+                                    <div className="input-group float-left ">
+                                        <input placeholder="Tên người dùng" value={formik.values.hoTen} data-toggle="dropdown" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
+                                        <button data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>
 
                                         <ul className="dropdown-menu set-height">
-                                        {renderUserListNotRegister(UserListNotRegister)}
+                                            {renderUserListNotRegister(UserListNotRegister)}
                                         </ul>
                                     </div>
-                                
+
                                 </form>
                                 <div className="col-3">
-                                    <a onClick={()=>{regUserByCourse(props.course,RegItem.taiKhoan)}} className="btn btn-success float-right">Ghi danh</a>
+                                    <a onClick={() => { regUserByCourse(props.course, RegItem.taiKhoan) }} className="btn btn-success float-right">Ghi danh</a>
 
                                 </div>
                             </div>
 
-                            </div>
                         </div>
+                    </div>
 
-                        {/* Modal body */}
-                        <div className="modal-body ">
+                    {/* Modal body */}
+                    <div className="modal-body ">
                         <div className="border-bottom border-secondary">
 
                             <div className="row">
                                 <h5 className="text-left col-6" id="URM-title"> Học viên chờ xác thực</h5>
                                 <div className="col-6">
-                                <input className="form-control" type="search" placeholder="Nhập tên học viên hoặc số điện thoại" aria-label="Search" />
+                                    <input className="form-control" type="search" placeholder="Nhập tên học viên hoặc số điện thoại" aria-label="Search" />
                                 </div>
                             </div>
                             .<table class="table table-center table-hover myTable table-striped">
@@ -228,15 +229,15 @@ export default function CourseRegisterModal(props) {
                                 renderOnZeroPageCount={null}
                             />
                         </div>
-                        </div>
+                    </div>
 
-                        {/* Modal footer */}
-                        <div className="modal-body">
+                    {/* Modal footer */}
+                    <div className="modal-body">
                         <div className="">
                             <div className="row">
                                 <h5 className="text-left col-6"> Học viên đã tham gia khóa học</h5>
                                 <div className="col-6">
-                                <input className="form-control" type="search" placeholder="Nhập tên học viên hoặc số điện thoại" aria-label="Search" />
+                                    <input className="form-control" type="search" placeholder="Nhập tên học viên hoặc số điện thoại" aria-label="Search" />
                                 </div>
 
                             </div>
@@ -274,13 +275,11 @@ export default function CourseRegisterModal(props) {
                                 containerClassName="paginationPages"
                                 activeClassName="active"
                                 renderOnZeroPageCount={null}
-                            />        
-                            </div>
+                            />
                         </div>
-
-                    
                     </div>
                 </div>
             </div>
+        </div>
     )
 }

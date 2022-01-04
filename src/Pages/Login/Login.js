@@ -65,16 +65,16 @@ export default function Login() {
             dispatch({
                 type: LOADING_GLOBAL_SHOW
             })
-            
+
             setTimeout(async () => {
                 await dispatch({
                     type: LOADING_GLOBAL_HIDE
                 })
                 //
-                let credentials = JSON.parse(localStorage.getItem('credentials'));            
-                if(credentials.maLoaiNguoiDung === "GV"){
+                let credentials = JSON.parse(localStorage.getItem('credentials'));
+                if (credentials.maLoaiNguoiDung === "GV") {
                     history.push('/admin/quanlynguoidung')
-                }else{
+                } else {
                     history.push('/trangchu')
                 }
             }, 2000);

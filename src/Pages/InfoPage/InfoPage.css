@@ -73,14 +73,14 @@
 }
 
 /* Modal update */
-/* .modal-content {
+.infoPage .modal .modal-content {
     background: url(../../Assets/Img/imgCourse/hornor.gif);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    
-} */
-.modalUpdate {
+}
+
+.infoPage .modal .modalUpdate {
     padding: 20px 50px;
     display: flex;
     flex-direction: column;
@@ -88,21 +88,21 @@
     align-items: center;
 }
 
-.modalUpdateHeader {
+.infoPage .modal .modalUpdateHeader {
     color: var(--colorWhite);
     padding: 10px 50px;
 }
 
-.modalUpdate h6 {
+.infoPage .modal .modalUpdate h6 {
     padding-top: 10px;
     color: var(--colorWhite);
 }
 
-.modalUpdate form {
+.infoPage .modal .modalUpdate form {
     width: 100%;
 }
 
-.modalUpdate input {
+.infoPage .modal .modalUpdate input {
     width: 100%;
     margin: 5px 0;
     padding: 5px 15px;
@@ -111,7 +111,7 @@
     outline: none;
 }
 
-.modalUpdate .modal-footer {
+.infoPage .modal .modalUpdate .modal-footer {
     border-top: none;
 }
 /* Btn */
