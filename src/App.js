@@ -25,7 +25,7 @@ import CourseManagement from './Pages/CourseManagement/CourseManagement';
 
 function App() {
   const dispatch = useDispatch()
-  
+ 
   useEffect(() => {
     dispatch(getCredentailFromLocal)
   }, [])

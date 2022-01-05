@@ -2,7 +2,7 @@
 import { http } from "../../Util/setting";
 import {GET_COURSE_LIST_NOT_REGISTER, GET_COURSE_LIST_CONFIRMED,GET_COURSE_LIST_NOTCONFIRMED,GET_COURSE_PAGINATION, GET_COURSE_CATEGORY, GET_COURSE_CATEGORY_LIST, GET_COURSE_DETAIL, GET_COURSE_LIST, GET_COURSE_SEARCH_LIST } from "../types/courseTypes";
 import { LOADING_COMPONENT_HIDE, LOADING_COMPONENT_SHOW, RENDER_PAGE_HIDE, RENDER_PAGE_SHOW } from "../types/isLoadingTypes";
-
+import swal from 'sweetalert'
 
 // get Category
 export const courseCategory = async (dispatch) => {
@@ -89,10 +89,22 @@ export const registerCourse = async (maKhoaHoc) => {
 
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/DangKyKhoaHoc', valuesRegisCoure)
-            console.log(result);
-
+            // console.log(result);
+            swal({
+                title: "Đăng kí thành công",
+                icon: "success",
+                timer: 2000,
+                button: false,
+            });
         } catch (errors) {
-            console.log(errors.response.data);
+            // console.log(errors.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
 }
@@ -151,7 +163,7 @@ export const getListCourse = async (dispatch) => {
 
 
 export const courseSearchList1 = (tuKhoa) => {
-    console.log(tuKhoa)
+    // console.log(tuKhoa)
     return async (dispatch) => {
         try {
             let result = await http.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tuKhoa}`)
@@ -186,7 +198,7 @@ export const getCourseListNotConfirmed=(taiKhoan)=>{
 }
 
 export const getCourseListConfirmed=(taiKhoan)=>{
-    console.log(taiKhoan)
+    // console.log(taiKhoan)
     return async(dispatch)=>{
         try {
             let result = await http.post('/api/QuanLyNguoiDung/LayDanhSachKhoaHocDaXetDuyet',{taiKhoan})
@@ -204,7 +216,7 @@ export const getCourseListConfirmed=(taiKhoan)=>{
 }
 
 export const getCourseListNotRegister=(taiKhoan)=>{
-    console.log(taiKhoan)
+    // console.log(taiKhoan)
     return async(dispatch)=>{
         try {
             let result = await http.post(`/api/QuanLyNguoiDung/LayDanhSachKhoaHocChuaGhiDanh?TaiKhoan=${taiKhoan}`)

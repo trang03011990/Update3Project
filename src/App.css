@@ -185,4 +185,16 @@ a:hover {
   color: var(--colorTextCard);
 }
 
+/* Responsive when component subcard over sreen */
+.moveSubCard .subCard {
+  right: 0;
+  left: -132%;
+}
+
+.moveSubCard .subCard::before {
+  left: 100%;
+  border-left: 15px solid var(--colorWhite);
+  border-right: 15px solid transparent;;
+}
+
 

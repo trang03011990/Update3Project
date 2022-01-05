@@ -5,6 +5,7 @@ import { http } from '../../Util/setting';
 import { useDispatch, useSelector } from 'react-redux'
 import { courseCategory, getListCourse } from '../../Redux/action/CourseAction';
 import { useEffect, useState } from 'react';
+import swal from 'sweetalert'
 
 export default function CourseModal() {
     const [thumb, setThumb] = useState('../Img/ImgLogo/logo512.png')
@@ -14,7 +15,7 @@ export default function CourseModal() {
 
     const dispatch = useDispatch()
     const addCourse = async (values) => {
-        console.log(values)
+        // console.log(values)
         let formData = new FormData();
         for (let key in values) {
             if (key !== 'hinhAnh') {
@@ -22,7 +23,7 @@ export default function CourseModal() {
             } else {
                 formData.append('hinhAnh', values.hinhAnh, values.hinhAnh.name)
             }
-            console.log(formData.get('hinhAnh'))
+            // console.log(formData.get('hinhAnh'))
 
         }
         try {
@@ -30,13 +31,26 @@ export default function CourseModal() {
             let result = await http.post('/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh', formData)
             if (result.request.status === 200) {
                 formik.resetForm()
-                alert('Thêm thành công')
+                // alert('Thêm thành công')
+                swal({
+                    title: "Thêm thành công",
+                    icon: "success",
+                    timer: 2000,
+                    button: false,
+                });
                 dispatch(getListCourse)
 
             }
 
         } catch (errors) {
-            alert(errors.response.data)
+            // alert(errors.response.data)
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
     // formik with add courses

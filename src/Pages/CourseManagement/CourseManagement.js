@@ -23,13 +23,14 @@ export default function CourseManagement() {
 
     useEffect(() => {
         const endOffset = itemOffset + 5;
-        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
         setCurrentItems(coursesList&&coursesList.slice(itemOffset, endOffset));
         setPageCount(Math.ceil(coursesList&&coursesList.length / 5));
     }, [itemOffset, coursesList])
 
     const handlePageClick = (event) => {
         const newOffset = event.selected * 5 % coursesList.length;
+        console.log(newOffset);
         console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
         setItemOffset(newOffset);
     };
