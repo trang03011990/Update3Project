@@ -10,239 +10,237 @@ export default function Home() {
     const dispatch = useDispatch()
 
     const renderCoursePopular = () => {
-        return coursesList.map((course, index) => {
-            if (index <= 3) {
+        return coursesList?.slice(0, 4).map((course, index) => {
+            return (
+                <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4 cardEffect">
+                    <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal">
+                        <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://ectimes.files.wordpress.com/2019/03/cac-ngon-ngu-lap-trinh-pho-bien-2.jpg" }} alt="" />
+                        <span className='stikerCard'>{course.tenKhoaHoc.length > 5 ? course.tenKhoaHoc : "Lập trình web"}</span>
+                        <div className="cardBodyGlobal">
+                            <h6 className="">{course.moTa.length > 50 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                            <div className='titleMaker'>
+                                <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
+                                <span className='ml-2 colorCardTitle'>Elon Musk</span>
+                            </div>
+                        </div>
+                        <div className='cardFooter'>
+                            <div>
+                                <p>800.000<sup>đ</sup></p>
+                                <p>400.000<sup>đ</sup></p>
+                            </div>
+                            <div>
+                                <i className="fas fa-star mr-1 textStar"></i>
+                                <span className='textStar'>4.9</span>
+                                <span className='colorCardTitle'>(7840)</span>
+                            </div>
+                        </div>
+                    </NavLink>
+                </div>
+            )
+
+        })
+    }
+
+    const renderCourseStudent = () => {
+        return coursesList?.slice(5, 9).map((course, index) => {
+
+            // console.log(course.hinhAnh);
+            if ((index + 1) % 2 === 0) {
                 return (
-                    <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4 cardEffect">
-                        <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal">
-                            <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://ectimes.files.wordpress.com/2019/03/cac-ngon-ngu-lap-trinh-pho-bien-2.jpg" }} alt="" />
-                            <span className='stikerCard'>{course.tenKhoaHoc.length > 5 ? course.tenKhoaHoc : "Lập trình web"}</span>
+                    <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
+                        <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal moveSubCard ">
+                            <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://codelearn.io/Upload/Blog/moi-truong-node-js-browser-va-khac-biet-63745001344.3067.jpg" }} alt="" />
+                            <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
                             <div className="cardBodyGlobal">
-                                <h6 className="">{course.moTa.length > 50 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                                <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
+                                </div>
+                            </div>
+                            <div className='cardFooter'>
                                 <div className='titleMaker'>
                                     <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
                                     <span className='ml-2 colorCardTitle'>Elon Musk</span>
                                 </div>
-                            </div>
-                            <div className='cardFooter'>
                                 <div>
                                     <p>800.000<sup>đ</sup></p>
-                                    <p>400.000<sup>đ</sup></p>
+                                    <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
+                                </div>
+
+                            </div>
+                            <div className='subCard'>
+                                <div className='subCardHead'>
+                                    <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
+                                    <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
+                                </div>
+                                <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
+                                <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
+                                </div>
+                                <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
+
+                            </div>
+                            <div className='cardSale'>
+                                <span>Yêu thích</span>
+                            </div>
+                        </NavLink>
+                    </div>
+                )
+
+            } else {
+                return (
+                    <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
+                        <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal ">
+                            <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://codelearn.io/Upload/Blog/moi-truong-node-js-browser-va-khac-biet-63745001344.3067.jpg" }} alt="" />
+                            <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
+                            <div className="cardBodyGlobal">
+                                <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
+                                </div>
+                            </div>
+                            <div className='cardFooter'>
+                                <div className='titleMaker'>
+                                    <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
+                                    <span className='ml-2 colorCardTitle'>Elon Musk</span>
                                 </div>
                                 <div>
-                                    <i className="fas fa-star mr-1 textStar"></i>
-                                    <span className='textStar'>4.9</span>
-                                    <span className='colorCardTitle'>(7840)</span>
+                                    <p>800.000<sup>đ</sup></p>
+                                    <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
                                 </div>
+
+                            </div>
+                            <div className='subCard'>
+                                <div className='subCardHead'>
+                                    <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
+                                    <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
+                                </div>
+                                <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
+                                <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
+                                </div>
+                                <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
+
+                            </div>
+                            <div className='cardSale'>
+                                <span>Yêu thích</span>
                             </div>
                         </NavLink>
                     </div>
                 )
             }
-        })
-    }
 
-    const renderCourseStudent = () => {
-        return coursesList.map((course, index) => {
-            if (index > 3 && index <= 7) {
-                // console.log(course.hinhAnh);
-                if((index+1) %2 === 0){
-                    return (
-                        <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
-                            <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal moveSubCard ">
-                                <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://codelearn.io/Upload/Blog/moi-truong-node-js-browser-va-khac-biet-63745001344.3067.jpg" }} alt="" />
-                                <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
-                                <div className="cardBodyGlobal">
-                                    <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                </div>
-                                <div className='cardFooter'>
-                                    <div className='titleMaker'>
-                                        <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
-                                        <span className='ml-2 colorCardTitle'>Elon Musk</span>
-                                    </div>
-                                    <div>
-                                        <p>800.000<sup>đ</sup></p>
-                                        <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
-                                    </div>
-    
-                                </div>
-                                <div className='subCard'>
-                                    <div className='subCardHead'>
-                                        <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
-                                        <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
-                                    </div>
-                                    <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
-                                    <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                    <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
-    
-                                </div>
-                                <div className='cardSale'>
-                                    <span>Yêu thích</span>
-                                </div>
-                            </NavLink>
-                        </div>
-                    )
-
-                }else{
-                    return (
-                        <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
-                            <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal ">
-                                <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://codelearn.io/Upload/Blog/moi-truong-node-js-browser-va-khac-biet-63745001344.3067.jpg" }} alt="" />
-                                <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
-                                <div className="cardBodyGlobal">
-                                    <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                </div>
-                                <div className='cardFooter'>
-                                    <div className='titleMaker'>
-                                        <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
-                                        <span className='ml-2 colorCardTitle'>Elon Musk</span>
-                                    </div>
-                                    <div>
-                                        <p>800.000<sup>đ</sup></p>
-                                        <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
-                                    </div>
-    
-                                </div>
-                                <div className='subCard'>
-                                    <div className='subCardHead'>
-                                        <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
-                                        <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
-                                    </div>
-                                    <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
-                                    <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                    <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
-    
-                                </div>
-                                <div className='cardSale'>
-                                    <span>Yêu thích</span>
-                                </div>
-                            </NavLink>
-                        </div>
-                    )
-                }
-            }
         })
     }
 
     const renderCourseReact = () => {
-        return coursesList.map((course, index) => {
-            if (index > 7 && index <= 11) {
-                // console.log(course.maKhoaHoc);
-                if((index +1) % 2 === 0){
-                    return (
-                        <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
-                            <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal moveSubCard">
-                                <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://canhme.com/wp-content/uploads/2018/09/Nodejs.png" }} alt="" />
-                                <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
-                                <div className="cardBodyGlobal">
-                                    <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
+        return coursesList?.slice(7, 11).map((course, index) => {
+            // console.log(course.maKhoaHoc);
+            if ((index + 1) % 2 === 0) {
+                return (
+                    <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
+                        <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal moveSubCard">
+                            <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://canhme.com/wp-content/uploads/2018/09/Nodejs.png" }} alt="" />
+                            <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
+                            <div className="cardBodyGlobal">
+                                <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
                                 </div>
-                                <div className='cardFooter'>
-                                    <div className='titleMaker'>
-                                        <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
-                                        <span className='ml-2 colorCardTitle'>Elon Musk</span>
-                                    </div>
-                                    <div>
-                                        <p>800.000<sup>đ</sup></p>
-                                        <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
-                                    </div>
-    
+                            </div>
+                            <div className='cardFooter'>
+                                <div className='titleMaker'>
+                                    <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
+                                    <span className='ml-2 colorCardTitle'>Elon Musk</span>
                                 </div>
-                                <div className='subCard'>
-                                    <div className='subCardHead'>
-                                        <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
-                                        <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
-                                    </div>
-                                    <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
-                                    <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                    <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
-    
+                                <div>
+                                    <p>800.000<sup>đ</sup></p>
+                                    <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
                                 </div>
-                                <div className='cardSale'>
-                                    <span>Yêu thích</span>
-                                </div>
-                            </NavLink>
-                        </div>
-                    )
 
-                }else{
-                    return (
-                        <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
-                            <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal">
-                                <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://canhme.com/wp-content/uploads/2018/09/Nodejs.png" }} alt="" />
-                                <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
-                                <div className="cardBodyGlobal">
-                                    <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
+                            </div>
+                            <div className='subCard'>
+                                <div className='subCardHead'>
+                                    <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
+                                    <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
                                 </div>
-                                <div className='cardFooter'>
-                                    <div className='titleMaker'>
-                                        <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
-                                        <span className='ml-2 colorCardTitle'>Elon Musk</span>
-                                    </div>
-                                    <div>
-                                        <p>800.000<sup>đ</sup></p>
-                                        <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
-                                    </div>
-    
+                                <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
+                                <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
                                 </div>
-                                <div className='subCard'>
-                                    <div className='subCardHead'>
-                                        <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
-                                        <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
-                                    </div>
-                                    <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
-                                    <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
-                                    <div className='cardIcon'>
-                                        <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
-                                        <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
-                                        <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
-                                    </div>
-                                    <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
-    
+                                <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
+
+                            </div>
+                            <div className='cardSale'>
+                                <span>Yêu thích</span>
+                            </div>
+                        </NavLink>
+                    </div>
+                )
+
+            } else {
+                return (
+                    <div key={index} className="col-md-6 col-xl-3 cardGlobalRes mt-4">
+                        <NavLink to={`/chitiet/${course.maKhoaHoc}`} className="cardGlobal">
+                            <img src={course.hinhAnh} onError={(e) => { e.target.onerror = null; e.target.src = "https://canhme.com/wp-content/uploads/2018/09/Nodejs.png" }} alt="" />
+                            <span className='stikerCard'>{course.tenKhoaHoc.length <= 10 ? course.tenKhoaHoc : "Lập trình web"}</span>
+                            <div className="cardBodyGlobal">
+                                <h6 className="">{course.moTa.length > 100 ? course.moTa.substr(0, 50) + '...' : 'Lập trình hiện đang là xu hướng trên toàn thế giới...'}</h6>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
                                 </div>
-                                <div className='cardSale'>
-                                    <span>Yêu thích</span>
+                            </div>
+                            <div className='cardFooter'>
+                                <div className='titleMaker'>
+                                    <div className='imgCardFooter'><img className='' src={require('../../Assets/Img/ImgAvatar/avatar2.png').default} alt="" /></div>
+                                    <span className='ml-2 colorCardTitle'>Elon Musk</span>
                                 </div>
-                            </NavLink>
-                        </div>
-                    )
-                }
+                                <div>
+                                    <p>800.000<sup>đ</sup></p>
+                                    <p>400.000<sup>đ</sup><i className="fas fa-tag iconTag"></i></p>
+                                </div>
+
+                            </div>
+                            <div className='subCard'>
+                                <div className='subCardHead'>
+                                    <img src={require('../../Assets/Img/ImgAvatar/emoji.png').default} alt="" />
+                                    <span className='ml-1 colorCardTitle'>Elun Musk Ricard</span>
+                                </div>
+                                <h6>BOOTCAMP - LẬP TRÌNH FULL STACK TỪ ZERO ĐẾN CÓ VIỆC</h6>
+                                <p className='colorCardTitle'>Đã có hơn 6200 bạn đăng kí học và có việc làm thông qua chương trình đào tạo Bootcamp Lập trình Front End chuyên nghiệp. Khóa học 100% thực hành cường độ cao theo dự án thực tế và kết nối doanh nghiệp hỗ trợ tìm việc ngay sau khi học...</p>
+                                <div className='cardIcon'>
+                                    <span><i className="far fa-clock iconOclock"></i>8 giờ</span>
+                                    <span><i className="far fa-calendar-alt iconCalendar"></i>4 tuần</span>
+                                    <span><i className="fas fa-signal iconLevel"></i>Tất cả</span>
+                                </div>
+                                <button className='btnGlobal btnSubCard'><NavLink to={`/chitiet/${course.maKhoaHoc}`}>Xem chi tiết</NavLink></button>
+
+                            </div>
+                            <div className='cardSale'>
+                                <span>Yêu thích</span>
+                            </div>
+                        </NavLink>
+                    </div>
+                )
             }
+
         })
     }
 
@@ -461,7 +459,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
             {/* Top Rate Instructor */}
