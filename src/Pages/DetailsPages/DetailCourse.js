@@ -3,12 +3,12 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { getCourseDetail, getListCourse, registerCourse } from '../../Redux/action/CourseAction'
 import './DetailCourse.css'
+import { userNotloginRegis } from '../../Redux/action/UserAction';
 export default function DetailCourse(props) {
     const history = useHistory()
     const dispatch = useDispatch()
     const { courseDetail, coursesList } = useSelector(state => state.CourseReducer)
-    // const { coursesList } = useSelector(state => state.CourseReducer)
-    // console.log(coursesList);
+    // let { codeCourse } = useSelector(state => state.UserReducers)
     const renderCourseRelated = () => {
         return coursesList?.slice(7, 11).map((course, index) => {
             if ((index + 1) % 2 === 0) {
@@ -292,6 +292,7 @@ export default function DetailCourse(props) {
                                     if (localStorage.getItem('credentials')) {
                                         registerCourse(props.match.params.maKhoaHoc)
                                     }else{
+                                        dispatch(userNotloginRegis(props.match.params.maKhoaHoc))
                                         history.push('/login')
                                     }
                                 }}>Đăng ký</button>

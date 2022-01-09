@@ -1,5 +1,5 @@
 import { http } from "../../Util/setting"
-import { GET_SEARCH_LIST_NOT_REG, GET_USER_LIST_CONFIRMED, GET_USER_LIST_NOTCONFIRMED, GET_USER_LIST_NOT_REGISTER, CANCEL_COURSE, GET_INFO_USER, GET_MY_COURSE, LOG_IN, UP_DATE, GET_USER_LIST, GET_SEARCH_LIST } from "../types/userTypes"
+import { GET_SEARCH_LIST_NOT_REG, GET_USER_LIST_CONFIRMED, GET_USER_LIST_NOTCONFIRMED, GET_USER_LIST_NOT_REGISTER, CANCEL_COURSE, GET_INFO_USER, GET_MY_COURSE, LOG_IN, UP_DATE, GET_USER_LIST, GET_SEARCH_LIST, NOT_LOGIN_REGISTER_COURSE } from "../types/userTypes"
 import swal from 'sweetalert'
 // Handle SignUp
 export const handleSignup = async (values, formikSignup) => {
@@ -65,6 +65,17 @@ export const userLogin = (values, formikLogin) => {
             });
         }
 
+    }
+}
+
+//userRegister course not login
+export const userNotloginRegis = (maKhoaHoc) => {
+    return (dispatch) => {
+        const action = {
+            type: NOT_LOGIN_REGISTER_COURSE ,
+            data : maKhoaHoc
+        }
+        dispatch(action)
     }
 }
 
@@ -187,6 +198,7 @@ export const userCancelCourse = (maKhoaHoc) => {
     }
 
 }
+
 //
 
 export const getUserList = async (dispatch) => {

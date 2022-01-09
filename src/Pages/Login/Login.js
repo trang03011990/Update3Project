@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { http } from '../../Util/setting'
@@ -11,6 +11,8 @@ import { LOADING_GLOBAL_HIDE, LOADING_GLOBAL_SHOW } from '../../Redux/types/isLo
 export default function Login() {
     const dispatch = useDispatch()
     const history = useHistory()
+    let { codeCourse } = useSelector(state => state.UserReducer)
+    // console.log(codeCourse);
 
     // Xử lý giao diện
     const [classContainer, setClassContainer] = useState('container')
@@ -72,9 +74,12 @@ export default function Login() {
                 })
                 //
                 let credentials = JSON.parse(localStorage.getItem('credentials'));
-                if (credentials.maLoaiNguoiDung === "GV") {
+                if(codeCourse){
+                    history.push(`/chitiet/${codeCourse}`)
+                }
+                else if (credentials.maLoaiNguoiDung === "GV") {
                     history.push('/admin/quanlynguoidung')
-                } else {
+                } else if (credentials.maLoaiNguoiDung === "HV") {
                     history.push('/trangchu')
                 }
             }, 2000);

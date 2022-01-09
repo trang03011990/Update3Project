@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, Link, useHistory } from 'react-router-dom'
 import { courseCategory } from '../../Redux/action/CourseAction'
+import { NOT_LOGIN_REGISTER_COURSE } from '../../Redux/types/userTypes'
 import './Header.css'
 
 export default function Header(props) {
@@ -35,6 +36,7 @@ export default function Header(props) {
         }
     }
 
+    // Search mobie
     const handleSubmitSearchMobile = async (e) => {
         e.preventDefault()
         // console.log(keyInputMobile.current.value);
@@ -47,6 +49,10 @@ export default function Header(props) {
 
     // Log out
     const logOut = () => {
+         dispatch({
+            type: NOT_LOGIN_REGISTER_COURSE,
+            data: null
+        })
         localStorage.removeItem("credentials")
         // taiKhoan = null
     }
