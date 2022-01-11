@@ -11,8 +11,6 @@ import { LOADING_GLOBAL_HIDE, LOADING_GLOBAL_SHOW } from '../../Redux/types/isLo
 export default function Login() {
     const dispatch = useDispatch()
     const history = useHistory()
-    let { codeCourse } = useSelector(state => state.UserReducer)
-    // console.log(codeCourse);
 
     // Xử lý giao diện
     const [classContainer, setClassContainer] = useState('container')
@@ -74,13 +72,18 @@ export default function Login() {
                 })
                 //
                 let credentials = JSON.parse(localStorage.getItem('credentials'));
-                if (codeCourse) {
-                    history.push(`/chitiet/${codeCourse}`)
-                }
-                else if (credentials.maLoaiNguoiDung === "GV") {
+                // if(codeCourse){
+                //     history.push(`/chitiet/${codeCourse}`)
+                // }
+                // else if (credentials.maLoaiNguoiDung === "GV") {
+                //     history.push('/admin/quanlynguoidung')
+                // } else if (credentials.maLoaiNguoiDung === "HV") {
+                //     history.push('/trangchu')
+                // }
+                if(credentials && credentials.maLoaiNguoiDung === "GV"){
                     history.push('/admin/quanlynguoidung')
-                } else if (credentials.maLoaiNguoiDung === "HV") {
-                    history.push('/trangchu')
+                }else{
+                    history.goBack()
                 }
             }, 2000);
         }
