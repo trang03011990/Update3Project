@@ -5,7 +5,7 @@ import { http } from '../../Util/setting';
 import { useDispatch, useSelector } from 'react-redux'
 import { courseCategory, getListCourse } from '../../Redux/action/CourseAction';
 import { useEffect, useState } from 'react';
-
+import swal from 'sweetalert'
 export default function CourseUpdateModal(props) {
     const [thumb, setThumb] = useState(props.courseUpdate.hinhAnh)
 
@@ -15,28 +15,71 @@ export default function CourseUpdateModal(props) {
     const dispatch = useDispatch()
     const updateCourse = async (values) => {
         console.log(values)
-        let formData = new FormData();
-        for (let key in values) {
-            if (key !== 'hinhAnh') {
-                formData.append(key, values[key]);
-            } else {
-                formData.append('hinhAnh', values.hinhAnh, values.hinhAnh.name)
+        if(values.hinhAnh.name){
+            let formData = new FormData();
+            for (let key in values) {
+                if (key !== 'hinhAnh') {
+                    formData.append(key, values[key]);
+                } else {
+                    formData.append('hinhAnh', values.hinhAnh, values.hinhAnh.name)
+                }
+                console.log(formData.get('moTa'))
+    
             }
-            console.log(formData.get('hinhAnh'))
-
-        }
-        try {
-            console.log(formData.get('hinhAnh'))
-            let result = await http.post('/api/QuanLyKhoaHoc/CapNhatKhoaHocUpload', formData)
-            if (result.request.status === 200) {
-                formik.resetForm()
-                alert('Cập nhật thành công')
-                dispatch(getListCourse)
-
+            try {
+                console.log(formData.get('hinhAnh'))
+                let result = await http.post('/api/QuanLyKhoaHoc/CapNhatKhoaHocUpload', formData)
+                if (result.request.status === 200) {
+                    formik.resetForm()
+                    // alert('Cập nhật thành công')
+                    swal({
+                        title: "Cập nhật thành công",
+                        icon: "success",
+                        timer: 2000,
+                        button: false,
+                    });
+                    dispatch(getListCourse)
+    
+                }
+    
+            } catch (errors) {
+                // alert(errors.response.data)
+                swal({
+                    title: errors.response?.data,
+                    icon: "warning",
+                    text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                    timer: 2000,
+                    button: false,
+                });
             }
 
-        } catch (errors) {
-            alert(errors.response.data)
+        }else{
+            try {
+                let result = await http.put('/api/QuanLyKhoaHoc/CapNhatKhoaHoc', values)
+                if (result.request.status === 200) {
+                    formik.resetForm()
+                    // alert('Cập nhật thành công')
+                    swal({
+                        title: "Cập nhật thành công",
+                        icon: "success",
+                        timer: 2000,
+                        button: false,
+                    });
+                    dispatch(getListCourse)
+                }
+    
+            } catch (errors) {
+                // alert(errors.response.data)
+                swal({
+                    title: errors.response?.data,
+                    icon: "warning",
+                    text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                    timer: 2000,
+                    button: false,
+                });
+            }
+
+
         }
     }
     
@@ -59,15 +102,28 @@ export default function CourseUpdateModal(props) {
                 .required('Mã khóa học không được để trống'),
 
             tenKhoaHoc: Yup.string()
-                .required('Tên Khóa học không được để trống'),
+                .required('Tên khóa học không được để trống'),
 
             moTa: Yup.string()
                 .required('Mô tả không được để trống'),
 
-            ngayTao: Yup.date()
+            ngayTao: Yup.string()
                 .required('Ngày tạo không được để trống')
+                .matches(/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/, 'Vui lòng nhập đúng định dạng DD/MM/YYYY'),
             // .format('DD/MM/YYYY', true),
-
+            danhGia: Yup.number()
+                .required('Đánh giá không được để trống')
+                .max(5, 'Đánh giá nhiều nhất là 5 sao')
+                .min(0, 'Đánh giá thấp nhất là 0 sao'),
+            luotXem: Yup.number()
+                .required('Đánh giá không được để trống')
+                .min(0, 'Lượt xem thấp nhất là 0'),
+            maDanhMucKhoaHoc: Yup.string()
+                .required('Danh mục khóa học không được để trống'),
+            taiKhoanNguoiTao: Yup.string()
+                .required('Tài khoản không được để trống'),
+            maNhom: Yup.string()
+                .required('Mã nhóm không được để trống')
         }),
         onSubmit: updateCourse
     }
@@ -116,7 +172,7 @@ export default function CourseUpdateModal(props) {
 
                     {/* Modal Header */}
                     <header className="head-form mb-0">
-                        <h3 id="header-title">THÊM KHÓA HỌC</h3>
+                        <h3 id="header-title">CẬP NHẬT</h3>
                     </header>
                     {/* Modal body */}
                     <div className="modal-body">
@@ -271,7 +327,7 @@ export default function CourseUpdateModal(props) {
 
                             {/* Modal footer */}
                             <div className="modal-footer col-12" id="modal-footer">
-                                <button id="btnThemNV" type="submit" className="btn btn-success">Thêm khóa học</button>
+                                <button id="btnThem" type="submit" className="btn btn-success">CẬP NHẬT</button>
                                 <button id="btnDong" type="button" className="btn btn-danger" data-dismiss="modal">Đóng</button>
                             </div>
                         </form>
@@ -281,122 +337,5 @@ export default function CourseUpdateModal(props) {
                 </div>
             </div>
         </div>
-        // <div className="modal fade" id="updateCourse">
-        //         <div className="modal-dialog formCourse">
-        //             <div className="modal-content">
-
-        //                 {/* Modal Header */}
-        //                 <header className="head-form mb-0">
-        //                     <h3 id="header-title">THÊM KHÓA HỌC</h3>
-        //                 </header>
-        //                 {/* Modal body */}
-        //                 <div className="modal-body">
-        //                     <form className="d-flex flex-wrap" role="form">
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-user" /></span>
-        //                                 </div>
-        //                                 <input type="text" name="tk" id="tknv" className="form-control input-sm" placeholder="Mã khóa học" />
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbTKNV" />
-        //                         </div>
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-address-book" /></span>
-        //                                 </div>
-        //                                 <input type="name" name="name" id="name" className="form-control input-sm" placeholder="Tên khóa học" />
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbTen" />
-        //                         </div>
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-briefcase" /></span>
-        //                                 </div>
-        //                                 <select className="form-control" id="chucvu">
-        //                                     <option>Danh mục khóa học</option>
-        //                                     <option>Lập trình FrontEnd </option>
-        //                                 </select>
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbChucVu" />
-        //                         </div>
-
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-calendar" /></span>
-        //                                 </div>
-        //                                 <input type="text" name="ngaylam" id="datepicker" className="form-control" placeholder="Ngày tạo" />
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbNgay" />
-        //                         </div>
-
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-user" /></span>
-        //                                 </div>
-        //                                 <input type="text" name="tk" id="tknv" className="form-control input-sm" placeholder="Đánh giá" />
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbTKNV" />
-        //                         </div>
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-address-book" /></span>
-        //                                 </div>
-        //                                 <input type="name" name="name" id="name" className="form-control input-sm" placeholder="Lượt xem" />
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbTen" />
-        //                         </div>
-        //                         <div className="form-group col-6">
-        //                             <div className="input-group">
-        //                                 <div className="input-group-prepend">
-        //                                     <span className="input-group-text"><i className="fa fa-briefcase" /></span>
-        //                                 </div>
-        //                                 <select className="form-control" id="chucvu">
-        //                                     <option>Người tạo</option>
-        //                                     <option>Nguyễn Ngọc Trang </option>
-        //                                 </select>
-        //                             </div>
-        //                             <span className="sp-thongbao" id="tbChucVu" />
-        //                         </div>
-
-        //                         <div className="form-group col-6">
-        //                             <div className="custom-file">
-        //                                 <input type="file" className="custom-file-input" id="customFile" />
-        //                                 <label className="custom-file-label text-left" htmlFor="customFile">Chọn hình ảnh</label>
-        //                             </div>
-
-        //                         </div>
-        //                         {/* <div className="form-group col-6">
-        //                                 <label htmlFor="exampleFormControlFile1">HInh</label>
-        //                                 <input type="file" className="form-control-file" id="exampleFormControlFile1" />
-                                    
-        //                         </div> */}
-
-
-        //                         <div className="col-12 container text-justify">
-        //                             <h5 className="card-header mb-2">Mô tả khóa học</h5>
-        //                             <div className="d-float bg-light p-3">
-        //                                 <img src="../img/logo512.png" className="img-fluid rounded w-25 mr-3 float-left" />
-
-        //                                 <p className="card-text bg-light mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus amet quo facilis laborum deleniti enim consequuntur nisi totam, vero suscipit debitis accusamus ipsum eveniet ipsam eligendi velit cum iste consectetur maiores repellendus nam doloremque natus. Consectetur cumque iure magni quae minus numquam sint saepe, iusto eligendi laborum inventore ducimus temporibus ut at sed adipisci necessitatibus nam. Maiores praesentium provident autem, harum dicta fugit, minima iste ea culpa, cum consequuntur debitis eius eos quos nostrum! Cumque eius facere voluptate maxime dolorum?</p>
-        //                             </div>
-        //                         </div>
-        //                     </form>
-
-        //                 </div>
-        //                 {/* Modal footer */}
-        //                 <div className="modal-footer" id="modal-footer">
-        //                     <button id="btnThemNV" type="button" className="btn btn-success">Thêm khóa học</button>
-        //                     <button id="btnCapNhat" type="button" className="btn btn-success">Cập nhật</button>
-        //                     <button id="btnDong" type="button" className="btn btn-danger" data-dismiss="modal">Đóng</button>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
     )
 }

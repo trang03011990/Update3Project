@@ -39,8 +39,8 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2), 0 10px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
-    width: 60rem;
-    height: 37rem;
+    width: 80vw;
+    height: 83vh;
     max-width: 100%;
     max-height: 100%;
 }
@@ -165,7 +165,7 @@
 
 .overlay {
     /* background: #36867b; */
-    background: url(../../Assets/Img/imgLogin/login1-bg.png);
+    background: url(../../Assets/Img/bg-all.png);
     background-size: cover;
     color: var(--colorWhite);
     position: relative;

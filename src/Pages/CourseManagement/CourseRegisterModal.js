@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { getUserListNotConfirmed, getUserListConfirmed, getUserListNotRegister, getSearchListNotReg, getUserList } from '../../Redux/action/UserAction'
 import { useFormik } from 'formik'
 import { http } from '../../Util/setting'
-
+import swal from 'sweetalert'
 export default function CourseRegisterModal(props) {
 
     const dispatch = useDispatch()
@@ -69,7 +69,7 @@ export default function CourseRegisterModal(props) {
                 <td className="align-middle">{item.taiKhoan}</td>
                 <td className="align-middle">{item.hoTen}</td>
                 <td>
-                    <button onClick={() => { regUserByCourse(props.course, item.taiKhoan) }} className="btn btn-success mx-1" >Xác thực</button>
+                    <button onClick={() => { regUserByCourse(props.course, item.taiKhoan) }} className="btn mx-1" id="btnThem" >Xác thực</button>
                     <button onClick={() => { deleteUserByCourse(props.course, item.taiKhoan) }} className="btn btn-danger mx-1" >Xóa</button>
 
                 </td>
@@ -104,14 +104,27 @@ export default function CourseRegisterModal(props) {
         const values = { maKhoaHoc: maKhoaHoc, taiKhoan: taiKhoan }
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/GhiDanhKhoaHoc', values)
-            alert(result.data)
-            formik.resetForm()
+            // alert(result.data)
+            swal({
+                title: result.data,
+                icon: "success",
+                timer: 2000,
+                button: false,
+            });
+            formik.resetForm();
             dispatch(getUserListNotRegister(maKhoaHoc))
             dispatch(getUserListConfirmed(maKhoaHoc))
             dispatch(getUserListNotConfirmed(maKhoaHoc))
 
         } catch (errors) {
-            alert(errors.response.data);
+            // alert(errors.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
 
@@ -119,18 +132,31 @@ export default function CourseRegisterModal(props) {
         const values = { maKhoaHoc: maKhoaHoc, taiKhoan: taiKhoan }
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/HuyGhiDanh', values)
-            alert(result.data)
+            // alert(result.data)
+            swal({
+                title: result.data,
+                icon: "success",
+                timer: 2000,
+                button: false,
+            });
             dispatch(getUserListNotRegister(maKhoaHoc))
             dispatch(getUserListConfirmed(maKhoaHoc))
             dispatch(getUserListNotConfirmed(maKhoaHoc))
 
         } catch (errors) {
-            alert(errors.response.data);
+            // alert(errors.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
 
     const formik = useFormik({
-        initialValues: { tenKhoaHoc: '' },
+        initialValues: { hoTen: '' },
     })
 
     //SEARCH VALUE
@@ -160,13 +186,13 @@ export default function CourseRegisterModal(props) {
                 <div className="modal-content px-3">
                     {/* Modal Header */}
                     <div className="modal-body ">
-                        <div className="pb-3 border-bottom border-secondary">
+                        <div className="border-bottom border-secondary">
                             <div className="row">
                                 <h5 className="text-left my-1 col-3" id="URM-title"> Chọn người dùng</h5>
                                 <form className='form-group col-6'>
                                     <div className="input-group float-left ">
-                                        <input placeholder="Tên người dùng" value={formik.values.hoTen} data-toggle="dropdown" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
-                                        <button data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button>
+                                        <input name='hoTen' placeholder="Tên người dùng" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.hoTen} data-toggle="dropdown" type="text" className="form-control input-dropdown" aria-label="Text input with segmented dropdown button" />
+                                        {/* <button data-reference="parent" data-boundary="window" type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false"></button> */}
 
                                         <ul className="dropdown-menu set-height">
                                             {renderUserListNotRegister(UserListNotRegister)}
@@ -175,7 +201,7 @@ export default function CourseRegisterModal(props) {
 
                                 </form>
                                 <div className="col-3">
-                                    <a onClick={() => { regUserByCourse(props.course, RegItem.taiKhoan) }} className="btn btn-success float-right">Ghi danh</a>
+                                    <a onClick={() => { regUserByCourse(props.course, RegItem.taiKhoan) }} className="btn btn-success float-right" id="btnThem">Ghi danh</a>
 
                                 </div>
                             </div>

@@ -10,7 +10,7 @@ import { useFormik } from 'formik'
 import { courseSearchList1, getListCourse } from '../../Redux/action/CourseAction'
 import LoginInfo from '../../component/LoginInfo/LoginInfo'
 import CourseUpdateModal from './CourseUpdateModal'
-
+import swal from 'sweetalert'
 export default function CourseManagement() {
 
     const dispatch = useDispatch()
@@ -50,11 +50,24 @@ export default function CourseManagement() {
         try {
             let result = await http.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${i}`)
             if (result.request.status === 200) {
-                alert('Xóa thành công');
+                // alert('Xóa thành công');
+                swal({
+                    title: "Xóa thành công",
+                    icon: "success",
+                    timer: 2000,
+                    button: false,
+                });
                 dispatch(getListCourse)
             }
-        } catch (err) {
-            alert(err.response.data);
+        } catch (errors) {
+            // alert(err.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
 
     }

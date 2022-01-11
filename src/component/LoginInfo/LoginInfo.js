@@ -21,7 +21,7 @@ export default function LoginInfo() {
         i && setUserUpdate(i)
     }
     return (
-        <div>
+        <div className='loginInfo'>
             <span className="text-right text-dark font-weight-bold fs-1">Chào {credentail && credentail.taiKhoan},</span>
             <img className="rounded-circle ml-2" style={{ width: '40px', height: '40px' }} src={credentail && credentail.hinhAnh} alt="" />
             <span className="dropdown">
@@ -33,7 +33,7 @@ export default function LoginInfo() {
                     <li><a onClick={() => { userLogout() }} className="dropdown-item" href="#">Đăng xuất</a></li>
                 </ul>
             </span>
-            <UserUpdateModal userUpdate={UserUpdate} />
+            {/* <UserUpdateModal userUpdate={UserUpdate} /> */}
 
         </div>
 

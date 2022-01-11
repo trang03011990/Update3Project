@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { getCourseListNotConfirmed, getCourseListConfirmed, getCourseListNotRegister } from '../../Redux/action/CourseAction'
 import { useFormik } from 'formik'
 import { http } from '../../Util/setting'
-
+import swal from 'sweetalert'
 
 export default function UserRegisterModal(props) {
     const dispatch = useDispatch()
@@ -70,7 +70,7 @@ export default function UserRegisterModal(props) {
                 <td className="align-middle" scope="row">{index + 1}</td>
                 <td className="align-middle">{item.tenKhoaHoc}</td>
                 <td>
-                    <button onClick={()=>{regCourseByUser(props.taiKhoanUser,item.maKhoaHoc)}}className="btn btn-success mx-1" >Xác thực</button>
+                    <button onClick={()=>{regCourseByUser(props.taiKhoanUser,item.maKhoaHoc)}}className="btn mx-1" id="btnThem" >Xác thực</button>
                     <button onClick={()=>{deleteCourseByUser(item.maKhoaHoc,props.taiKhoanUser)}} className="btn btn-danger mx-1" >Xóa</button>
 
                 </td>
@@ -125,7 +125,13 @@ export default function UserRegisterModal(props) {
         const values={taiKhoan:taiKhoan,maKhoaHoc:maKhoaHoc}
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/GhiDanhKhoaHoc', values)
-            alert(result.data)
+            // alert(result.data)
+            swal({
+                title: result.data,
+                icon: "success",
+                timer: 2000,
+                button: false,
+            });
             // formik.resetForm()
             // Em bỏ dùng cái reset form
             setCoursesTerm('')
@@ -134,7 +140,14 @@ export default function UserRegisterModal(props) {
             dispatch(getCourseListNotConfirmed(taiKhoan))
 
         } catch (errors) {
-            alert(errors.response.data);
+            // alert(errors.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
 
@@ -142,13 +155,26 @@ export default function UserRegisterModal(props) {
         const values={maKhoaHoc:maKhoaHoc,taiKhoan:taiKhoan}
         try {
             let result = await http.post('/api/QuanLyKhoaHoc/HuyGhiDanh', values)
-            alert(result.data)
+            // alert(result.data)
+            swal({
+                title: result.data,
+                icon: "success",
+                timer: 2000,
+                button: false,
+            });
             dispatch(getCourseListNotRegister(taiKhoan))
             dispatch(getCourseListConfirmed(taiKhoan))
             dispatch(getCourseListNotConfirmed(taiKhoan))
 
         } catch (errors) {
-            alert(errors.response.data);
+            // alert(errors.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
 
@@ -166,7 +192,7 @@ export default function UserRegisterModal(props) {
                 <div className="modal-content px-3">
                     {/* Modal Header */}
                     <div className="modal-body ">
-                        <div className="pb-3 border-bottom border-secondary">
+                        <div className="border-bottom border-secondary">
                             <div className="row">
                                 <h5 className="text-left my-1 col-3" id="URM-title"> Chọn khóa học</h5>
                                
@@ -187,7 +213,7 @@ export default function UserRegisterModal(props) {
                             </form>
                           
                                 <div className="col-3">
-                                    <a onClick={()=>{regCourseByUser(props.taiKhoanUser,RegItem.maKhoaHoc)}} className="btn btn-success float-right">Ghi danh</a>
+                                    <a onClick={()=>{regCourseByUser(props.taiKhoanUser,RegItem.maKhoaHoc)}} className="btn float-right" id="btnThem">Ghi danh</a>
 
                                 </div>
                             </div>

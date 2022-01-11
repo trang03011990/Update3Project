@@ -7,7 +7,7 @@ import { http } from '../../Util/setting';
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserList } from '../../Redux/action/UserAction';
 import { useEffect } from 'react';
-
+import swal from 'sweetalert';
 
 export default function UserUpdateModal(props) {
     //Handle addUser
@@ -17,13 +17,26 @@ export default function UserUpdateModal(props) {
             let result = await http.put('/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung', values)
             if (result.request.status === 200) {
                 formik.resetForm()
-                alert('Cập nhật thành công')
+                // alert('Cập nhật thành công')
+                swal({
+                    title: "Cập nhật thành công",
+                    icon: "success",
+                    timer: 2000,
+                    button: false,
+                });
                 dispatch(getUserList)
 
             }
 
         } catch (errors) {
-            alert(errors.response.data)
+            // alert(errors.response.data)
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
     
@@ -137,7 +150,7 @@ export default function UserUpdateModal(props) {
                             </div>
                             
                             <div className="modal-footer" id="modal-footer">
-                                <button id="btnCapNhat" type="submit" className="btn btn-success">Cập nhật</button>
+                                <button id="btnThem" type="submit" className="btn">Cập nhật</button>
                                 <button id="btnDong" type="button" className="btn btn-danger" data-dismiss="modal">Đóng</button>
                             </div>
 

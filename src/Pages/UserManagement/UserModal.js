@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { http } from '../../Util/setting';
 import { useDispatch } from 'react-redux'
 import { getUserList } from '../../Redux/action/UserAction';
-
+import swal from 'sweetalert'
 
 export default function UserModal(props) {
     
@@ -15,11 +15,24 @@ export default function UserModal(props) {
             let result = await http.post('/api/QuanLyNguoiDung/ThemNguoiDung', values)
             if (result.request.status === 200) {
                 formik.resetForm()
-                alert('Thêm thành công')
+                // alert('Thêm thành công')
+                swal({
+                    title: "Thêm thành công",
+                    icon: "success",
+                    timer: 2000,
+                    button: false,
+                });
                 dispatch(getUserList)                
             }
         } catch (errors) {
-            alert(errors.response.data)
+            // alert(errors.response.data)
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
     }
     const formik = useFormik({
@@ -59,7 +72,7 @@ export default function UserModal(props) {
     )
     
     return (
-        <div className="modal fade" id="myModal">
+        <div className="modal fade " id="myModal">
             <div className="modal-dialog formUser">
                 <div className="modal-content px-3">
                     <header className="head-form mb-0">
@@ -130,7 +143,7 @@ export default function UserModal(props) {
 
 
                             <div className="modal-footer" id="modal-footer">
-                        <button id="btnThemNV" type="submit" className="btn btn-success" >Thêm người dùng</button>
+                        <button id="btnThem" type="submit" className="btn" >Thêm người dùng</button>
                         <button id="btnDong" type="button" className="btn btn-danger" data-dismiss="modal">Đóng</button>
                     </div>
 
