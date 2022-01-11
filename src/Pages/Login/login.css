@@ -66,7 +66,7 @@
 }
 
 .social-container a {
-    border: 1px solid #80e27e;
+    border: 1px solid #36867b;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -76,7 +76,7 @@
     width: 40px;
 }
 .social-container a:hover {
-    background: #80e27e;
+    background: #36867b;
     color: white;
     transition: 0.3s;
 }
@@ -107,8 +107,8 @@
 
 .loginBody button {
     border-radius: 20px;
-    border: 1px solid #087f23;
-    background: #087f23;
+    border: 1px solid #36867b;
+    background: #36867b;
     color: var(--colorWhite);
     font-size: 12px;
     font-weight: bold;
@@ -127,12 +127,10 @@
 }
 
 .loginBody button.ghost {
-    background: #087f23;
+    background: #36867b;
     border-color: var(--colorWhite);
 }
-#container {
-    /* margin-top: 2rem; */
-}
+
 
 .form-container {
     position: absolute;
@@ -242,8 +240,9 @@
 /* errorMessage */
 .errorMessage {
     text-align: left;
-    color: var(--colorGlobal);
+    color: rgba(240, 23, 23, 0.835);
     width: 100%;
+    font-size: 15px
 }
 
 .container.right-panel-active .sign-up-container::-webkit-scrollbar{

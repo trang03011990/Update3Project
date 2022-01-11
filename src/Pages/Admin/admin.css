@@ -225,8 +225,17 @@ input:focus {
 
 /* Mobie */
 @media screen and (max-width: 767px) {
+    h1,h2{
+        font-size: 20px !important;
+    }
     body{
         font-size: 12px;
+    }
+    .ghost{
+        font-size: 12px
+    }
+    .loginBody button {
+        padding: 10px 10px;
     }
 #content{
     padding: 40px 0!important;
@@ -303,7 +312,13 @@ input:focus {
 }
 
 @media screen and (width: 812px) {
-    
+    h1,h2{
+        font-size: 20px;
+    }
+    input{
+        padding:5px 10px!important
+        
+    }
     .myTable{
         font-size: 10px;
     }
@@ -353,6 +368,11 @@ input:focus {
     .unhide{
         display: block;
     }
+    .loginBody{
+        margin: 5px 0;
+        height: 95vh;
+    }
+    
     /* #btnThem{
         margin-left: 1rem!important;
     } */

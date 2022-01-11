@@ -74,7 +74,7 @@ export default function Login() {
                 })
                 //
                 let credentials = JSON.parse(localStorage.getItem('credentials'));
-                if(codeCourse){
+                if (codeCourse) {
                     history.push(`/chitiet/${codeCourse}`)
                 }
                 else if (credentials.maLoaiNguoiDung === "GV") {
@@ -97,16 +97,11 @@ export default function Login() {
 
     return (
         <>
-            <div className='loginBody'>
+            <div className='loginBody container-fluid'>
                 <div className={classContainer} id="container">
                     <div className="form-container sign-up-container">
                         <form action="#" onSubmit={formikSignup.handleSubmit}>
-                            <h1>Đăng ký</h1>
-                            <div className="social-container">
-                                <a href="#" className="social"><i className="fab fa-facebook-f" /></a>
-                                <a href="#" className="social"><i className="fab fa-google-plus-g" /></a>
-                                <a href="#" className="social"><i className="fab fa-linkedin-in" /></a>
-                            </div>
+                            <h2 className='pt-3'>ĐĂNG KÝ</h2>
                             <input
                                 onBlur={formikSignup.handleBlur}
                                 onChange={formikSignup.handleChange}
@@ -164,11 +159,11 @@ export default function Login() {
                     <div className="form-container sign-in-container">
                         <form className='formLoginUser' action="#" onSubmit={formikLogin.handleSubmit}>
                             <h1>Đăng nhập</h1>
-                            <div className="social-container">
+                            {/* <div className="social-container">
                                 <a href="#" className="social"><i className="fab fa-facebook-f" /></a>
                                 <a href="#" className="social"><i className="fab fa-google-plus-g" /></a>
                                 <a href="#" className="social"><i className="fab fa-linkedin-in" /></a>
-                            </div>
+                            </div> */}
                             <span>hoặc sử dụng tài khoản đã đăng ký của bạn</span>
                             <input
                                 onChange={formikLogin.handleChange}
