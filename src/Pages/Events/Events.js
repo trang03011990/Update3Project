@@ -9,7 +9,7 @@ export default function Events() {
     let interval = useRef()
 
     const startTimer = () => {
-        const countdownDate = new Date('March 1 2022 00:00:00').getTime()
+        const countdownDate = new Date('March 30 2022 00:00:00').getTime()
         // console.log(countdownDate);
 
         let interval = setInterval(() => {
@@ -49,12 +49,12 @@ export default function Events() {
             <section>
                 <div className='sliderEvent'>
                     <div className='timeEvents'>
-                        <div className='countDownEvent'>
-                            <section className='events'>
+                        <div className='countDownEvent row'>
+                            <section className='events '>
                                 <p className='dayEvent'>{timerDays}</p>
                                 <p><small>Ngày</small></p>
                             </section>
-                            <section className='events'>
+                            <section className='events '>
                                 <p className='hoursEvent'>{timerHours}</p>
                                 <p><small>giờ</small></p>
                             </section>

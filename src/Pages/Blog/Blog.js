@@ -18,7 +18,7 @@ export default function Blog() {
                                         <div className='cardBlog'>
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1671/61b6368a3a089.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1671/61b6368a3a089.jpg" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/time_effort.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1671/61b6368a3a089.jpg" }} alt="" />
                                                 </div>
                                                 <h6>Thời gian và động lực</h6>
                                                 <div className='timeBlogCourse'>
@@ -38,7 +38,7 @@ export default function Blog() {
                                         <div className='cardBlog'>
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1653/61b46a3d757cc.png" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1653/61b46a3d757cc.png" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/tailwindcss.png').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1653/61b46a3d757cc.png" }} alt="" />
                                                 </div>
                                                 <h6>Tailwind css và cách cài đặt cơ bản </h6>
                                                 <div className='timeBlogCourse'>
@@ -58,7 +58,7 @@ export default function Blog() {
                                         <div className='cardBlog'>
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1637/61b175b3debf2.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1653/61b46a3d757cc.png" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/html.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1653/61b46a3d757cc.png" }} alt="" />
 
                                                 </div>
                                                 <h6>Cấu trúc cơ bản trong HTML</h6>
@@ -80,7 +80,7 @@ export default function Blog() {
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
 
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1463/61a1bbd28851c.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1463/61a1bbd28851c.jpgog_posts/1653/61b46a3d757cc.png" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/materiralUI.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1463/61a1bbd28851c.jpgog_posts/1653/61b46a3d757cc.png" }} alt="" />
                                                 </div>
                                                 <h6>Material UI custom theme với TypeScript</h6>
                                                 <div className='timeBlogCourse'>
@@ -101,7 +101,7 @@ export default function Blog() {
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
 
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1385/6197a09e60b56.png" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1385/6197a09e60b56.png" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/redux.png').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1385/6197a09e60b56.png" }} alt="" />
                                                 </div>
                                                 <h6>Cách tạo một component nhanh chóng chỉ bằng 3 ký tự</h6>
                                                 <div className='timeBlogCourse'>
@@ -122,7 +122,7 @@ export default function Blog() {
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
 
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1355/619482df77279.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1355/619482df77279.jpg" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/type_javascripts.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1355/619482df77279.jpg" }} alt="" />
                                                 </div>
                                                 <h6>Material UI custom theme với TypeScript</h6>
                                                 <div className='timeBlogCourse'>
@@ -143,7 +143,7 @@ export default function Blog() {
                                             <div className='cardBlogContent'>
                                                 <div className='imgCardBlog'>
 
-                                                    <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1069/617946ecf0f63.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1069/617946ecf0f63.jpg" }} alt="" />
+                                                    <img src={require('../../Assets/Img/imgBlog/javascripts.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1069/617946ecf0f63.jpg" }} alt="" />
                                                 </div>
                                                 <h6>Xử lý bất đồng bộ trong Javascript (phần 2)</h6>
                                                 <div className='timeBlogCourse'>
@@ -162,7 +162,7 @@ export default function Blog() {
                                     <div className="col-xl-6 mb-4">
                                         <div className='cardBlog'>
                                             <div className='cardBlogContent'>
-                                                <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1073/6179eca8efb18.jpg" onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1073/6179eca8efb18.jpg" }} alt="" />
+                                                <img src={require('../../Assets/Img/imgBlog/type_javascripts.jpg').default} onError={(e) => { e.target.onerror = null; e.target.src = "https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1073/6179eca8efb18.jpg" }} alt="" />
                                                 <h6>TyperScrip là gì, Vì sao nên dùng TyperScript</h6>
                                                 <div className='timeBlogCourse'>
                                                     <div className='reviewBlog'>
@@ -172,7 +172,7 @@ export default function Blog() {
                                                     </div>
                                                     <p>Đăng bởi<span> Jhony Đặng</span></p>
                                                 </div>
-                                                <p className='colorCardTitle'>Link khóa học cho anh em nào tò mò ( Đừng lo vì tất cả đều miễn......</p>
+                                                <p className='colorCardTitle'>Link khóa học cho anh em nào tò mò ( Đừng lo vì tất cả đều miễn phí......)</p>
                                                 <button className='btnGlobal btnCardBlog'><a href="">Xem thêm</a></button>
                                             </div>
                                         </div>
@@ -198,7 +198,7 @@ export default function Blog() {
                                 <div className='blogRightBox'>
                                     <h6>Bài đăng được đề xuất</h6>
                                     <div className='postBlog'>
-                                        <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1027/6174b331c4b4f.png" alt="" />
+                                        <img src={require('../../Assets/Img/imgBlog/routing.png').default} alt="" />
                                         <h6>Routing trong reactjs</h6>
                                         <p className='colorCardTitle'>Chúng ta sẽ cùng nhau tìm hiểu cách routing trong reactjs...</p>
                                         <div className='imgPost'>
@@ -207,7 +207,7 @@ export default function Blog() {
                                         </div>
                                     </div>
                                     <div className='postBlog'>
-                                        <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1021/6173be68944ad.jpg" alt="" />
+                                        <img src={require('../../Assets/Img/imgBlog/oops.jpg').default} alt="" />
                                         <h6>Lập trình hướng đối tượng oop</h6>
                                         <p className='colorCardTitle'>Chúng ta sẽ cùng nhau tìm hiểu cách oop trong reactjs...</p>
                                         <div className='imgPost'>
@@ -216,7 +216,7 @@ export default function Blog() {
                                         </div>
                                     </div>
                                     <div className='postBlog'>
-                                        <img src="https://cdn.fullstack.edu.vn/f8-learning/blog_posts/1017/6172259ab8b80.png" alt="" />
+                                        <img src={require('../../Assets/Img/imgBlog/batdongbo.png').default} alt="" />
                                         <h6>Xử Lý Bất Đồng Bộ Trong Javascript</h6>
                                         <p className='colorCardTitle'>Chắc chắn khi lập trình, bạn sẽ có các công việc cần thời gian delay (gọi API, lấy dữ liệu từ Database, đọc/ghi file,...). Và đây...</p>
                                         <div className='imgPost'>

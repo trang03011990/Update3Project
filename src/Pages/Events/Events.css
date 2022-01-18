@@ -224,6 +224,9 @@
     .donors > h6{
         font-size: 25px;
     }
+    .events{
+        margin-bottom: 20px;
+    }
 }
 
 /* Tablet */
@@ -234,6 +237,9 @@
     }
     .donors{
         padding: 50px;
+    }
+    .events{
+        margin-bottom: 20px;
     }
 
 }

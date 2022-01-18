@@ -15,9 +15,17 @@ export default function PaginationPages() {
         setCurrentPage(selected + 1)
     }
 
+    const scrollToTop = () =>{
+        window.scrollTo({
+          top: 0, 
+          behavior: 'smooth'
+        });
+      };
+
     useEffect(() => {
        const action = getCoursePag(currentPage,count)
        dispatch(action)
+       scrollToTop()
     }, [currentPage])
 
     return (
