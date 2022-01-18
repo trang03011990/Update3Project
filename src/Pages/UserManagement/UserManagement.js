@@ -10,7 +10,7 @@ import { getSearchList, getUserList } from '../../Redux/action/UserAction'
 import { useFormik } from 'formik'
 import LoginInfo from '../../component/LoginInfo/LoginInfo'
 import UserUpdateModal from './UserUpdateModal'
-
+import swal from 'sweetalert'
 
 export default function UserManagement(props) {
     const dispatch = useDispatch()
@@ -50,12 +50,25 @@ export default function UserManagement(props) {
         try {
             let result = await http.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${i}`)
             if (result.request.status === 200) {
-                alert('Xóa thành công');
+                // alert('Xóa thành công');
+                swal({
+                    title: "Xóa thành công",
+                    icon: "success",
+                    timer: 2000,
+                    button: false,
+                });
                 dispatch(getUserList)
             }
 
-        } catch (err) {
-            alert(err.response.data);
+        } catch (errors) {
+            // alert(err.response.data);
+            swal({
+                title: errors.response?.data,
+                icon: "warning",
+                text: 'Đã xảy ra lỗi vui lòng quay lại trang chủ hoặc thử lại',
+                timer: 2000,
+                button: false,
+            });
         }
 
     }
@@ -86,7 +99,7 @@ export default function UserManagement(props) {
                 <td style={{ width: '27%' }}>
                     <button onClick={() => { getUser(item.taiKhoan) }} type="button" className="btn mx-1 text-wrap" id="btnThem" data-toggle="modal" data-target="#userReg" >
                         <span className='hide'>Ghi danh</span>
-                        <span className='unhide'>Reg</span>
+                        <span className='unhide'>Thêm</span>
                     </button>
                     <button onClick={() => { updateUser(item) }} className="btn btn-warning m-1 text-wrap" data-toggle="modal" data-target="#userUpdate">Sửa</button>
                     <button onClick={() => { deleteUser(item.taiKhoan) }} className="btn btn-danger mx-1 text-wrap" >Xóa</button>

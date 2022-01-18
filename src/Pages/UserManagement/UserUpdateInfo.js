@@ -9,7 +9,7 @@ import { getUserList } from '../../Redux/action/UserAction';
 import { useEffect } from 'react';
 import swal from 'sweetalert';
 
-export default function UserUpdateModal(props) {
+export default function UserUpdateInfo(props) {
     //Handle addUser
     const dispatch = useDispatch()
     const updateUser = async (values) => {
@@ -81,7 +81,7 @@ export default function UserUpdateModal(props) {
         formik.setValues(props.userUpdate)
     }, [props.userUpdate])
     return (
-        <div className="modal fade" id="userUpdate">
+        <div className="modal fade" id="userUpdateInfo">
             <div className="modal-dialog formUser">
                 <div className="modal-content px-3">
                     <header className="head-form mb-0">

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import { useState, useEffect } from 'react'
-import UserUpdateModal from '../../Pages/UserManagement/UserUpdateModal'
+import UserUpdateInfo from '../../Pages/UserManagement/UserUpdateInfo'
 
 export default function LoginInfo() {
     const history = useHistory()
@@ -21,7 +21,7 @@ export default function LoginInfo() {
         i && setUserUpdate(i)
     }
     return (
-        <div>
+        <div className='loginInfo'>
             <span className="text-right text-dark font-weight-bold fs-1">Chào {credentail && credentail.taiKhoan},</span>
             <img className="rounded-circle ml-2" style={{ width: '40px', height: '40px' }} src={credentail && credentail.hinhAnh} alt="" />
             <span className="dropdown">
@@ -29,11 +29,11 @@ export default function LoginInfo() {
 
                 </button>
                 <ul className="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                    <li><a onClick={() => { updateUser(credentail) }} className="dropdown-item" data-toggle="modal" data-target="#userUpdate">Cập nhật thông tin</a></li>
+                    <li><a onClick={() => { updateUser(credentail) }} className="dropdown-item" data-toggle="modal" data-target="#userUpdateInfo">Cập nhật thông tin</a></li>
                     <li><a onClick={() => { userLogout() }} className="dropdown-item" href="#">Đăng xuất</a></li>
                 </ul>
             </span>
-            <UserUpdateModal userUpdate={UserUpdate} />
+            <UserUpdateInfo userUpdate={UserUpdate} />
 
         </div>
 

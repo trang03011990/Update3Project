@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './App.css';
-import BackToTop from './component/BackTop/BackToTop';
 import About from './Pages/Abouts/About';
 import Blog from './Pages/Blog/Blog';
 import Course from './Pages/Course/Course';
@@ -47,11 +46,9 @@ function App() {
         <AdminTemplate path="/admin/quanlynguoidung" component={UserManagement}  />
         <AdminTemplate path="/admin/quanlykhoahoc" component={CourseManagement} />
         <UserTemplate exact component={PageNotLoading} />
-
       </Switch> 
-      {/* <BackToTop /> */}
     </BrowserRouter>
-  );
+  )
 }
 
 export default App;

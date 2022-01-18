@@ -8,9 +8,8 @@ export default function AdminTemplate(props) {
   const dispatch=useDispatch()
   return <Fragment>
     <Route exact path={props.path} render={(propsRoute) => {
-      return <Fragment>
-        
-        <div className="container-fluid align-middle">
+      return <Fragment>  
+        <div className="container-fluid align-middle bg-all">
           {/* Right  */}
           <div id="content" className="text-center wrapper align-middle">
             <nav id="sidebar" className='align-middle'>
